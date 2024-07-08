@@ -14,11 +14,17 @@ for folder, subfolders, files in os.walk(os.getcwd()):
 
         file_list.append(filePath)
         print(filePath)
+while True:
+    package_name = input("Enter package name: ")
+    base_py = input("Enter base python file name: ")
+    exec_name = input("Enter executable name: ")
+    node_name = input("Enter node name: ")
 
-package_name = input("Enter package name: ")
-base_py = input("Enter base python file name: ")
-exec_name = input("Enter executable name: ")
-node_name = input("Enter node name: ")
+    if (package_name == base_py) or (package_name == exec_name) or (package_name == node_name) or (base_py == exec_name) or (base_py == node_name) or (exec_name == node_name):
+        print("All names must be unique")
+        continue
+
+    break
 
 for file in file_list:
     if "configure.py" in file:
@@ -39,4 +45,10 @@ for file in file_list:
 shutil.move("__TEMPLATE_PACKAGE", package_name)
 
 
+current_location = os.getcwd()
+up = os.path.abspath(os.path.join(current_location, os.pardir))
+os.chdir(up)
+shutil.copytree(os.path.join("ros2_py_template"), os.path.join(package_name))
+
+    
     
