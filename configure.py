@@ -22,6 +22,7 @@ up = os.path.abspath(os.path.join(current_location, os.pardir))
 os.chdir(up)
 shutil.copytree(os.path.join("ros2_py_template"), os.path.join(package_name))
 os.chdir(os.path.join(package_name))
+shutil.rmtree(".git")
 
 for folder, subfolders, files in os.walk(os.getcwd()):
     for file in files:
@@ -56,5 +57,5 @@ for file in file_list:
 shutil.move("__TEMPLATE_PACKAGE", package_name)
 shutil.move("resource/__TEMPLATE_PACKAGE", "resource/" + package_name)
 
-    
+
     
