@@ -67,6 +67,7 @@ for file in file_list:
 
 shutil.move("__TEMPLATE_PACKAGE", package_name)
 shutil.move("resource/__TEMPLATE_PACKAGE", "resource/" + package_name)
+os.remove("configure.py")
 
 print("You can run")
 print("*"*30)
