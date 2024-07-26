@@ -16,4 +16,4 @@ This generates a param YAML, launch file with this YAML and an executable. Once 
  
 
 Once the creation is done simply use `colcon build --packages-selct <package>`. You will receive warnings that this "template package" does not follow naming conventions.
-Launch your code using `ros2 launch <package> start.py`
+Launch your code using `ros2 launch <package> start.launch.py`
