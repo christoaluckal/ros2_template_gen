@@ -1,6 +1,18 @@
 import os
 import shutil
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 ignore = [".git"]
 file_list = []
 
@@ -33,7 +45,7 @@ for folder, subfolders, files in os.walk(os.getcwd()):
             continue
 
         file_list.append(filePath)
-        print(filePath)
+        # print(filePath)
 
 
 
@@ -57,5 +69,9 @@ for file in file_list:
 shutil.move("__TEMPLATE_PACKAGE", package_name)
 shutil.move("resource/__TEMPLATE_PACKAGE", "resource/" + package_name)
 
-
-    
+print("You can run")
+print("*"*30)
+print(bcolors.WARNING + f"colcon build --packages-select {package_name} " + bcolors.ENDC)
+print(bcolors.OKCYAN + f"ros2 launch {package_name} start.launch.py" + bcolors.ENDC)
+print(bcolors.OKGREEN + f"ros2 run {package_name} {exec_name}" + bcolors.ENDC)
+print("*"*30)
