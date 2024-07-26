@@ -23,8 +23,7 @@ while True:
     node_name = input("Enter node name: ")
 
     if (package_name == base_py) or (package_name == exec_name) or (package_name == node_name) or (base_py == exec_name) or (base_py == node_name) or (exec_name == node_name):
-        print("All names must be unique")
-        continue
+        raise Exception(f"{bcolors.FAIL} All names must be unique {bcolors.ENDC}")
 
     break
 
