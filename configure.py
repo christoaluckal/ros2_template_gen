@@ -18,11 +18,12 @@ file_list = []
 
 while True:
     package_name = input("Enter package name: ")
-    base_py = input("Enter base python file name: ")
-    exec_name = input("Enter executable name: ")
+    base_cpp = input("Enter base CPP file name: ")
+    exec_name = input("Enter CPP executable name: ")
     node_name = input("Enter node name: ")
+    class_name = input("Enter Class Name: ")
 
-    if (package_name == base_py) or (package_name == exec_name) or (package_name == node_name) or (base_py == exec_name) or (base_py == node_name) or (exec_name == node_name):
+    if (package_name == base_cpp) or (package_name == exec_name) or (package_name == node_name) or (base_cpp == exec_name) or (base_cpp == node_name) or (exec_name == node_name):
         raise Exception(f"{bcolors.FAIL} All names must be unique {bcolors.ENDC}")
 
     break
@@ -52,21 +53,23 @@ for file in file_list:
     if "configure.py" in file:
         continue
     with open(file, "r") as f:
+        print(file)
         content = f.read()
-        content = content.replace("__TEMPLATE_PACKAGE", package_name)
-        content = content.replace("__TEMPLATE_EXEC_NAME", exec_name)
-        content = content.replace("__TEMPLATE_NODE_NAME", node_name)
-        content = content.replace("__TEMPLATE_ENTRY", base_py)
+        content = content.replace("__TEMPLATEPACKAGENAME__", package_name)
+        content = content.replace("__TEMPLATEEXENAME__", exec_name)
+        content = content.replace("__TEMPLATENODENAME__", node_name)
+        content = content.replace("__TEMPLATECPPNAME__", base_cpp)
+        content = content.replace("__TEMPLATECLASSNAME__",class_name)
 
     with open(file, "w") as f:
         f.write(content)
 
-    if "__TEMPLATE_ENTRY" in file:
-        new_file = file.replace("__TEMPLATE_ENTRY", base_py)
+    if "__TEMPLATECPPNAME__" in file:
+        new_file = file.replace("__TEMPLATECPPNAME__", base_cpp)
         shutil.move(file, new_file)
 
-shutil.move("__TEMPLATE_PACKAGE", package_name)
-shutil.move("resource/__TEMPLATE_PACKAGE", "resource/" + package_name)
+shutil.move("include/__TEMPLATEPACKAGENAME__", f"include/{package_name}")
+# shutil.move("resource/__TEMPLATE_PACKAGE", "resource/" + package_name)
 os.remove("configure.py")
 
 print("You can run")

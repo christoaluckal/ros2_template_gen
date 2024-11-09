@@ -1,9 +1,9 @@
-__TEMPLATE_NODE_NAME:
+__TEMPLATENODENAME__:
   ros__parameters:
-    # bool_value: True
-    int_number: 5
-    # float_number: 3.14
-    # str_text: "Hello Universe"
+    bool_value: True
+    int_number: 10
+    double_number: 3.14
+    str_text: "Hello Universe"
     # bool_array: [True, False, True]
     # int_array: [10, 11, 12, 13]
     # float_array: [7.5, 400.4]

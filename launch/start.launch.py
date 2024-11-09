@@ -1,21 +1,23 @@
-from launch import LaunchDescription
-from ament_index_python.packages import get_package_share_directory
 import os
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
 from launch_ros.actions import Node
 
 def generate_launch_description():
     ld = LaunchDescription()
-    parameter = os.path.join(get_package_share_directory('__TEMPLATE_PACKAGE'), 'config', 'params.yaml')
 
-    converter_node = Node(
-        package='__TEMPLATE_PACKAGE',
-        executable='__TEMPLATE_EXEC_NAME',
-        name='__TEMPLATE_NODE_NAME',
-        output='screen',
-        parameters=[parameter]
+    config = os.path.join(
+        get_package_share_directory('__TEMPLATEPACKAGENAME__'),
+        'params',
+        'params.yaml'
+        )
+        
+    node=Node(
+        package = '__TEMPLATEPACKAGENAME__',
+        name = '__TEMPLATENODENAME__',
+        executable = '__TEMPLATEEXENAME__',
+        parameters = [config]
     )
 
-
-    ld.add_action(converter_node)
-
+    ld.add_action(node)
     return ld
