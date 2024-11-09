@@ -31,7 +31,7 @@ while True:
 current_location = os.getcwd()
 up = os.path.abspath(os.path.join(current_location, os.pardir))
 os.chdir(up)
-shutil.copytree(os.path.join("ros2_py_template"), os.path.join(package_name))
+shutil.copytree(os.path.join("ros2_template_gen"), os.path.join(package_name))
 os.chdir(os.path.join(package_name))
 shutil.rmtree(".git")
 
