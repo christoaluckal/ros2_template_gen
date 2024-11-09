@@ -1,4 +1,4 @@
-# ros2_py_template
+# ros2_template_gen
 
 Template code to generate a ros2 python package
 
