@@ -1,6 +1,6 @@
 # ros2_template_gen
 
-Template code to generate a ros2 python package
+Template code to generate a ros2 CPP package
 
 This generates a param YAML, launch file with this YAML and an executable. Once run the params are loaded. Currently only 1 set of launch, params, exe are generated.
 
