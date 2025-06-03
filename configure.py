@@ -22,6 +22,14 @@ while True:
     exec_name = input("Enter CPP executable name: ")
     node_name = input("Enter node name: ")
     class_name = input("Enter Class Name: ")
+    name_flag = input("Do you want the package.xml to have your username and email? (y/n): ")
+    if name_flag.lower() == 'y':
+        author_name = input("Enter your username: ")
+        author_email = input("Enter your email: ")
+    else:
+        print(f"{bcolors.WARNING}Skipping author name and email{bcolors.ENDC}")
+        author_name = "Your Name"
+        author_email = ""
 
     if (package_name == base_cpp) or (package_name == exec_name) or (package_name == node_name) or (base_cpp == exec_name) or (base_cpp == node_name) or (exec_name == node_name):
         raise Exception(f"{bcolors.FAIL} All names must be unique {bcolors.ENDC}")
@@ -55,6 +63,8 @@ for file in file_list:
     with open(file, "r") as f:
         print(file)
         content = f.read()
+        content = content.replace("__TEMPLATE_EMAIL__", author_email)
+        content = content.replace("__TEMPLATENAME__", author_name)
         content = content.replace("__TEMPLATEPACKAGENAME__", package_name)
         content = content.replace("__TEMPLATEEXENAME__", exec_name)
         content = content.replace("__TEMPLATENODENAME__", node_name)
@@ -67,6 +77,12 @@ for file in file_list:
     if "__TEMPLATECPPNAME__" in file:
         new_file = file.replace("__TEMPLATECPPNAME__", base_cpp)
         shutil.move(file, new_file)
+
+    if "README.md" in file:
+        os.remove(file)
+        with open(file, "w") as f:
+            f.write(f"# {package_name}\n\nThis package was generated using the ros2_template_gen script.\n\n## Usage\n\nTo build the package, run:\n\n```bash\ncolcon build --packages-select {package_name}\n```\n\nTo launch the node, run:\n\n```bash\nros2 launch {package_name} start.launch.py\n```\n\nTo run the executable, run:\n\n```bash\nros2 run {package_name} {exec_name}\n```\n")
+
 
 shutil.move("include/__TEMPLATEPACKAGENAME__", f"include/{package_name}")
 # shutil.move("resource/__TEMPLATE_PACKAGE", "resource/" + package_name)
