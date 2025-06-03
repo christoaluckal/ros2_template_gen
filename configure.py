@@ -65,6 +65,11 @@ for file in file_list:
         new_file = file.replace("__TEMPLATE_ENTRY", base_py)
         shutil.move(file, new_file)
 
+    if "README.md" in file:
+        os.remove(file)
+        with open(file, "w") as f:
+            f.write(f"# {package_name}\n\nThis package was generated using the ros2_template_gen script.\n\n## Usage\n\nTo build the package, run:\n\n```bash\ncolcon build --packages-select {package_name}\n```\n\nTo launch the node, run:\n\n```bash\nros2 launch {package_name} start.launch.py\n```\n\nTo run the executable, run:\n\n```bash\nros2 run {package_name} {exec_name}\n```\n")
+
 shutil.move("__TEMPLATE_PACKAGE", package_name)
 shutil.move("resource/__TEMPLATE_PACKAGE", "resource/" + package_name)
 os.remove("configure.py")
