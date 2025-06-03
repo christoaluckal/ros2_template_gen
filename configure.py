@@ -21,6 +21,14 @@ while True:
     base_py = input("Enter base python file name: ")
     exec_name = input("Enter executable name: ")
     node_name = input("Enter node name: ")
+    name_flag = input("Do you want the package.xml to have your username and email? (y/n): ")
+    if name_flag.lower() == 'y':
+        author_name = input("Enter your username: ")
+        author_email = input("Enter your email: ")
+    else:
+        print(f"{bcolors.WARNING}Skipping author name and email{bcolors.ENDC}")
+        author_name = "Your Name"
+        author_email = ""
 
     if (package_name == base_py) or (package_name == exec_name) or (package_name == node_name) or (base_py == exec_name) or (base_py == node_name) or (exec_name == node_name):
         raise Exception(f"{bcolors.FAIL} All names must be unique {bcolors.ENDC}")
@@ -53,6 +61,8 @@ for file in file_list:
         continue
     with open(file, "r") as f:
         content = f.read()
+        content = content.replace("__TEMPLATE_EMAIL", author_email)
+        content = content.replace("__TEMPLATE_NAME", author_name)
         content = content.replace("__TEMPLATE_PACKAGE", package_name)
         content = content.replace("__TEMPLATE_EXEC_NAME", exec_name)
         content = content.replace("__TEMPLATE_NODE_NAME", node_name)

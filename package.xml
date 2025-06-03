@@ -4,7 +4,7 @@
   <name>__TEMPLATE_PACKAGE</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="christo12aluckal@gmail.com">christoa</maintainer>
+  <maintainer email="__TEMPLATE_EMAIL">__TEMPLATE_NAME</maintainer>
   <license>Apache-2.0</license>
 
   <test_depend>ament_copyright</test_depend>
